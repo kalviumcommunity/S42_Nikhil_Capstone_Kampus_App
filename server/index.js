@@ -29,6 +29,45 @@ app.get("/api/assignments", (req, res) => {
   res.json({ success: true, data: assignments })
 })
 
+
+
+// POST Routes
+app.post("/api/students", (req, res) => {
+  try {
+    const { name, email } = req.body
+    if(!name || !email) {
+       return res.status(400).json({ success: false, message: "Name and email are required" })
+    }
+    const newStudent = {
+      id: students.length + 1,
+      name,
+      email,
+    }
+    students.push(newStudent)
+    res.json({ success: true, data: newStudent, message: "Student created" })
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Internal Server Error" })
+  }
+})
+
+app.post("/api/assignments", (req, res) => {
+  try {
+    const { title, dueDate } = req.body
+    if(!title || !dueDate) {
+         res.status(400).json({ success: false, message: "Title and due date are required" })
+    }
+    const newAssignment = {
+      id: assignments.length + 1,
+      title,
+      dueDate,
+    }
+    assignments.push(newAssignment)
+    res.json({ success: true, data: newAssignment, message: "Assignment created" })
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Internal Server Error" })
+  }
+})
+
 // Start server
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`)
