@@ -33,25 +33,39 @@ app.get("/api/assignments", (req, res) => {
 
 // POST Routes
 app.post("/api/students", (req, res) => {
-  const { name, email } = req.body
-  const newStudent = {
-    id: students.length + 1,
-    name,
-    email,
+  try {
+    const { name, email } = req.body
+    if(!name || !email) {
+       return res.status(400).json({ success: false, message: "Name and email are required" })
+    }
+    const newStudent = {
+      id: students.length + 1,
+      name,
+      email,
+    }
+    students.push(newStudent)
+    res.json({ success: true, data: newStudent, message: "Student created" })
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Internal Server Error" })
   }
-  students.push(newStudent)
-  res.json({ success: true, data: newStudent, message: "Student created" })
 })
 
 app.post("/api/assignments", (req, res) => {
-  const { title, dueDate } = req.body
-  const newAssignment = {
-    id: assignments.length + 1,
-    title,
-    dueDate,
+  try {
+    const { title, dueDate } = req.body
+    if(!title || !dueDate) {
+         res.status(400).json({ success: false, message: "Title and due date are required" })
+    }
+    const newAssignment = {
+      id: assignments.length + 1,
+      title,
+      dueDate,
+    }
+    assignments.push(newAssignment)
+    res.json({ success: true, data: newAssignment, message: "Assignment created" })
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Internal Server Error" })
   }
-  assignments.push(newAssignment)
-  res.json({ success: true, data: newAssignment, message: "Assignment created" })
 })
 
 // Start server
