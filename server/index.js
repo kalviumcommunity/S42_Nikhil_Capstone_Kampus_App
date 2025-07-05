@@ -29,6 +29,31 @@ app.get("/api/assignments", (req, res) => {
   res.json({ success: true, data: assignments })
 })
 
+
+
+// POST Routes
+app.post("/api/students", (req, res) => {
+  const { name, email } = req.body
+  const newStudent = {
+    id: students.length + 1,
+    name,
+    email,
+  }
+  students.push(newStudent)
+  res.json({ success: true, data: newStudent, message: "Student created" })
+})
+
+app.post("/api/assignments", (req, res) => {
+  const { title, dueDate } = req.body
+  const newAssignment = {
+    id: assignments.length + 1,
+    title,
+    dueDate,
+  }
+  assignments.push(newAssignment)
+  res.json({ success: true, data: newAssignment, message: "Assignment created" })
+})
+
 // Start server
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`)
