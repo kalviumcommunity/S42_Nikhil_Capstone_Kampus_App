@@ -68,6 +68,33 @@ app.post("/api/assignments", (req, res) => {
   }
 })
 
+// PUT Routes
+app.put("/api/students/:id", (req, res) => {
+  const id = Number.parseInt(req.params.id)
+  const { name, email } = req.body
+  const studentIndex = students.findIndex((s) => s.id === id)
+
+  if (studentIndex === -1) {
+    return res.status(404).json({ success: false, message: "Student not found" })
+  }
+
+  students[studentIndex] = { id, name, email }
+  res.json({ success: true, data: students[studentIndex], message: "Student updated" })
+})
+
+app.put("/api/assignments/:id", (req, res) => {
+  const id = Number.parseInt(req.params.id)
+  const { title, dueDate } = req.body
+  const assignmentIndex = assignments.findIndex((a) => a.id === id)
+
+  if (assignmentIndex === -1) {
+    return res.status(404).json({ success: false, message: "Assignment not found" })
+  }
+
+  assignments[assignmentIndex] = { id, title, dueDate }
+  res.json({ success: true, data: assignments[assignmentIndex], message: "Assignment updated" })
+})
+
 // Start server
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`)
