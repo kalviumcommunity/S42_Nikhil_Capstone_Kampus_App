@@ -269,4 +269,4 @@ This project is licensed under the MIT License - see the `LICENSE` file for deta
 Project Link: [https://github.com/NikhilM512/kampus-app](https://github.com/NikhilM512/kampus-app)
 
 
-## Backend Deployement Link : [https://s42-nikhil-capstone-kampus-app.onrender.com/]
+## Backend Deployment Link : [https://s42-nikhil-capstone-kampus-app.onrender.com/] (https://s42-nikhil-capstone-kampus-app.onrender.com/)
