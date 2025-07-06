@@ -12,15 +12,29 @@ const courseSchema = new mongoose.Schema(
       unique: true,
     },
     instructor: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
-    students: [
-      {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
+        required: [true, "Instructor is required"],
+        validate: {
+          validator: async (instructorId) => {
+            const user = await mongoose.model("User").findById(instructorId)
+            return user && user.role === "teacher"
+          },
+          message: "Instructor must be a user with teacher role",
+        },
       },
+      students: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "User",
+          validate: {
+            validator: async (studentId) => {
+              const user = await mongoose.model("User").findById(studentId)
+              return user && user.role === "student"
+            },
+            message: "All enrolled users must be students",
+          },
+        },
     ],
   },
   { timestamps: true },
