@@ -11,15 +11,19 @@ const assignmentSchema = new mongoose.Schema(
       type: Date,
       required: true,
     },
-    status: {
-      type: String,
-      enum: ["pending", "in-progress", "completed"],
-      default: "pending",
-    },
-    points: {
-      type: Number,
-      default: 100,
-    },
+    submissions: [
+      {
+        student: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "User",
+        },
+        submittedAt: {
+          type: Date,
+          default: Date.now,
+        },
+        grade: Number,
+      },
+    ],
   },
   {
     timestamps: true,
