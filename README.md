@@ -270,3 +270,5 @@ Project Link: [https://github.com/NikhilM512/kampus-app](https://github.com/Nikh
 
 
 ## Backend Deployment Link : [https://s42-nikhil-capstone-kampus-app.onrender.com/] (https://s42-nikhil-capstone-kampus-app.onrender.com/)
+
+## Frontend Deployed Link : [https://prismatic-tulumba-08f8d4.netlify.app/login] (https://prismatic-tulumba-08f8d4.netlify.app/login)
